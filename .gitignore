@@ -1,0 +1,73 @@
+# Laravel & PHP
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/.idea
+/.vscode
+/.phpunit.result.cache
+/.phpunit.cache
+# /storage/logs
+# /storage/framework/cache/data/*
+# /storage/framework/sessions/*
+# /storage/framework/testing/*
+# /storage/framework/views/*
+
+# Environment variables
+/.env
+/.env.backup
+/.env.local
+/.env.development
+/.env.testing
+/.env.production
+
+# Laravel Horizon
+/horizon.log
+
+# Laravel Telescope
+/storage/telescope
+
+# Ignored by default
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.out
+*.phar
+
+# Composer and NPM Logs
+composer.lock
+yarn.lock
+npm-debug.log
+yarn-error.log
+.pnp
+.pnp.js
+
+# Cache
+.cache
+.phpunit.result.cache
+
+# Coveralls
+.coveralls.yml
+
+# IDEs and editors
+/.idea
+/.vscode
+
+# Local environment
+Homestead.yaml
+Homestead.json
+.env.homestead
+
+# Other files and directories
+node_modules/
+npm-debug.log
+package-lock.json
+yarn-error.log
+
+# Mac specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db

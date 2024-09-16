@@ -1,0 +1,31 @@
+{
+  "_global-plugin-0862b267.js": {
+    "file": "assets/global-plugin-0862b267.js"
+  },
+  "resources/css/app-admin.css": {
+    "file": "assets/app-admin-e3b0c442.css",
+    "isEntry": true,
+    "src": "resources/css/app-landing.css"
+  },
+  "resources/css/app-landing.css": {
+    "file": "assets/app-admin-e3b0c442.css",
+    "isEntry": true,
+    "src": "resources/css/app-landing.css"
+  },
+  "resources/js/app-admin.js": {
+    "file": "assets/app-admin-e9c2c040.js",
+    "imports": [
+      "_global-plugin-0862b267.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app-admin.js"
+  },
+  "resources/js/app-landing.js": {
+    "file": "assets/app-landing-0f302013.js",
+    "imports": [
+      "_global-plugin-0862b267.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app-landing.js"
+  }
+}
