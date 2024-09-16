@@ -124,16 +124,20 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-6. Running migration and seeder for intial data.
+6. Running migration for initiate data province, city, district, villange for country indonesia.
 
 ```bash
-php artisan migrate --seed
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
-
-7. Running migration for initiate data province, city, district, villange for country indonesia.
 
 ```bash
 php artisan laravolt:indonesia:seed
+```
+
+7. Running migration and seeder for intial data.
+
+```bash
+php artisan migrate --seed
 ```
 
 8. Running log viewer

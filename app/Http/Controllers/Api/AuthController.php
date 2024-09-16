@@ -132,12 +132,6 @@ class AuthController extends Controller
      *       required={"email", "password"},
      *       @OA\Property(property="email", type="string"),
      *       @OA\Property(property="password", type="string", format="password"),
-     *       @OA\Property(
-     *         property="user_two_factor_authentication",
-     *         type="object",
-     *         @OA\Property(property="method", type="string", example="send|verify"),
-     *         @OA\Property(property="verification_code", type="string", example="send|verify"),
-     *       ),
      *     )
      *   ),
      *   @OA\Response(
@@ -152,8 +146,6 @@ class AuthController extends Controller
         $rules = [
             'email' => 'required|email',
             'password' => 'required',
-            'user_two_factor_authentication.method' => 'nullable|in:send,verify',
-            'user_two_factor_authentication.verification_code' => 'nullable|numeric|min:10000|max:99999',
         ];
 
         $messages = [];
@@ -225,7 +217,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
+     * @OA\Get(
      *   tags={"Api|Auth"},
      *   path="/api/auth/me",
      *   summary="Profil user after login",
