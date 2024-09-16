@@ -142,6 +142,16 @@ php artisan laravolt:indonesia:seed
 php artisan log-viewer:publish
 ```
 
+8. Running ls swagger for Api documentation
+
+```bash
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+```
+
+```bash
+ php artisan l5-swagger:generate
+```
+
 9. Install depedencies using this command.
 
 ```bash

@@ -8,7 +8,7 @@
 /.vscode
 /.phpunit.result.cache
 /.phpunit.cache
-# /storage/logs
+/storage/api-docs
 # /storage/framework/cache/data/*
 # /storage/framework/sessions/*
 # /storage/framework/testing/*

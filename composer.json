@@ -9,6 +9,7 @@
         "askedio/laravel-soft-cascade": "^11.0",
         "barryvdh/laravel-dompdf": "^3.0",
         "cviebrock/eloquent-sluggable": "^10.0",
+        "darkaonline/l5-swagger": "^8.6",
         "doctrine/dbal": "^3.9",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
