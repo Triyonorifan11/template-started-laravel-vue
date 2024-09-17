@@ -10,6 +10,7 @@ use App\Mail\SendMail;
 use App\Models\User;
 use App\Models\Roles;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -129,8 +130,8 @@ class AuthController extends Controller
      *     required=true,
      *     @OA\JsonContent(
      *       type="object",
-     *       required={"email", "password"},
-     *       @OA\Property(property="email", type="string"),
+     *       required={"username", "password"},
+     *       @OA\Property(property="username", type="string"),
      *       @OA\Property(property="password", type="string", format="password"),
      *     )
      *   ),
@@ -144,14 +145,15 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'email' => 'required|email',
-            'password' => 'required',
+            'username' => 'required|string|exists:users,username',
+            'password' => 'required|string',
+            'recaptcha' => 'nullable|string',
         ];
 
         $messages = [];
 
         $attributes = [
-            'email' => 'Email',
+            'username' => 'Username',
             'password' => 'Password',
         ];
 
@@ -162,7 +164,26 @@ class AuthController extends Controller
             return ResponseFormatter::error($errors, 'Please fill out the form correctly.', 422);
         }
 
-        $credentials = $request->only('email', 'password');
+        if ($request->filled('recaptcha')) {
+            $client = new Client();
+            $response = $client->post(
+                'https://www.google.com/recaptcha/api/siteverify',
+                [
+                    'verify' => !(config('app.env') == 'local'),
+                    'form_params' => [
+                        'secret' => config('env.recaptcha_key.secret'),
+                        'remoteip' => request()->getClientIp(),
+                        'response' => $request->recaptcha,
+                    ]
+                ]
+            );
+            $body = json_decode((string)$response->getBody());
+            if (!$body->success) {
+                return ResponseFormatter::error([], 'Failed verfication captcha!', 401);
+            }
+        }
+
+        $credentials = $request->only('username', 'password');
 
         if (!auth()->attempt($credentials)) {
             return ResponseFormatter::error([], 'Username or password is incorrect!', 401);

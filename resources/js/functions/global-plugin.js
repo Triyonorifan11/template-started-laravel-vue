@@ -1,5 +1,7 @@
 import moment from 'moment'
 import 'moment/dist/locale/id';
+import Swal from "sweetalert2";
+
 export default {
     install(app, options) {
         app.config.globalProperties.$formatBytes = (bytes, decimals=2) => {
@@ -35,12 +37,11 @@ export default {
                 }).format(text);
             },
             app.config.globalProperties.$axiosHandleError = (error, callback = null) => {
-                const provide = app._context.provides;
                 let res = error.response ? error.response.data.status : null;
                 let code = error.response ? error.response.status : null;
 
                 if (code == 400) {
-                    provide.$swal({
+                    Swal.fire({
                         title: "Oopss...",
                         icon: "error",
                         text: res ? res.message : 'Terjadi kesalahan server',
@@ -60,7 +61,7 @@ export default {
                     localStorage.clear();
                     window.location.replace(baseUrl + '/login');
                 } else if (code == 422) {
-                    provide.$swal({
+                    Swal.fire({
                         title: "Oopss...",
                         icon: "error",
                         text: res ? res.message : 'Terjadi kesalahan server',
@@ -74,7 +75,7 @@ export default {
                         }
                     });
                 } else if (code == 404) {
-                    provide.$swal({
+                    Swal.fire({
                         title: "Oopss...",
                         icon: "error",
                         text: "Request/Resource not found!",
@@ -88,7 +89,7 @@ export default {
                         }
                     });
                 } else {
-                    provide.$swal({
+                    Swal.fire({
                         title: "Oopss...",
                         icon: "error",
                         text: "Terjadi kesalahan koneksi",
@@ -105,15 +106,15 @@ export default {
 
 
             },
-            app.config.globalProperties.$ewpLoadingShow = () => {
-                var loadingDiv = document.createElement('div')
-
-                loadingDiv.className = 'ewp-loading'
+            app.config.globalProperties.$loadingShow = () => {
+                var loadingDiv = `<div class="box-loader">
+                                    <span class="loader"></span>
+                                </div>`
 
                 $('body').append(loadingDiv);
             },
-            app.config.globalProperties.$ewpLoadingHide = (error) => {
-                $('.ewp-loading').hide();
+            app.config.globalProperties.$loadingHide = (error) => {
+                $('.box-loader').hide();
             },
             (app.config.globalProperties.$initializeAppPlugins = (error) => {
                 window.$(".drawer-overlay").remove();
@@ -171,6 +172,16 @@ export default {
                         });
                     }, 10);
                 });
+            }),
+            /**
+             * @param type is api or api-web
+             */
+            (app.config.globalProperties.$prefix = (type) => {
+                if (type == "api") {
+                    return "api/";
+                } else {
+                    return "api-web/";
+                }
             })
     }
 };

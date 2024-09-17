@@ -112,8 +112,8 @@
                             <!--end::Menu wrapper-->
                             <!--begin::Toolbar-->
                             <div class="flex-equal text-end ms-1">
-                                <router-link :to="{name: 'login'}"
-                                    class="btn btn-success">Sign In</router-link>
+                                <a :href="baseUrl+'/login'"
+                                    class="btn btn-success">Sign In</a>
                             </div>
                             <!--end::Toolbar-->
                         </div>

@@ -1,5 +1,10 @@
-/* css for admin */
+<template>
+    <div class="box-loader">
+        <span class="loader"></span>
+    </div>
+</template>
 
+<style scoped>
 :root{
     --main-color : #00d0ff;
     --white-color: #fff;
@@ -84,3 +89,4 @@
   }
 }
 /* end loader */
+</style>

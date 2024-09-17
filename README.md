@@ -127,10 +127,6 @@ php artisan key:generate
 6. Running migration for initiate data province, city, district, villange for country indonesia.
 
 ```bash
-php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
-```
-
-```bash
 php artisan laravolt:indonesia:seed
 ```
 

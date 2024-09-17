@@ -6,7 +6,6 @@ import Api from "@/services/api";
 
 import Home from "@/views/landing/index.vue";
 import About from "@/views/landing/about/index.vue";
-import Login from "@/views/admin/Login.vue";
 
 // import Booking from "@/views/booking/Index.vue";
 
@@ -32,15 +31,6 @@ const routes = [
         meta: {
             title: "About",
             auth: true,
-        },
-    },
-    {
-        path: "/login",
-        name: "login",
-        component: Login,
-        meta: {
-            guest: true,
-            title: "Login",
         },
     },
     // {

@@ -3,15 +3,24 @@ import { createRouter, createWebHistory } from "vue-router";
 import mainStore from "@/store/index.js";
 
 import Api from "@/services/api";
-
-import Login from "@/views/admin/Login.vue";
-
+import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
+import Dashboard from "@/views/admin/dashboard/Dashboard.vue";
+
 
 // import Booking from "@/views/booking/Index.vue";
 
 import NotFound from "@/views/errors/404.vue";
 import ForbiddenAccess from "@/views/errors/403.vue";
+import globalConfig from "@/config/config";
+
+const routesWithPrefix = (prefix, routes) => {
+    return routes.map((route) => {
+        route.path = `${prefix}${route.path}`;
+
+        return route;
+    });
+};
 
 const routes = [
     {
@@ -19,54 +28,51 @@ const routes = [
         name: "login",
         component: Login,
         meta: {
-            guest: true,
             title: "Login",
         },
     },
     
     {
-        path: "/",
+        path: "/home",
         component: Home,
-        name: "Home",
+        name: "home",
         meta: {
             title: "Home",
             auth: true,
         },
     },
-    // {
-    //     path: "/booking",
-    //     name: "booking",
-    //     component: Booking,
-    //     meta: {
-    //         title: "Booking",
-    //         specificRole: [
-    //             import.meta.env.VITE_ROLE_ADMIN,
-    //             import.meta.env.VITE_ROLE_SUPER_ADMIN,
-    //             import.meta.env.VITE_ROLE_REVIEWER,
-    //         ],
-    //         auth: true,
-    //     },
-    // },
+    ...routesWithPrefix("/admin", [
+        {
+            path: "/dashboard",
+            name: "dashboard",
+            component: Dashboard,
+            meta: {
+                title: "Dashboard",
+                specificRole: [globalConfig.role.admin, globalConfig.role.super_admin, globalConfig.role.developer],
+                auth: true,
+            },
+        },
+    ]),
     
 
     {
         path: "/403",
         component: ForbiddenAccess,
         meta: {
-            title: "403 - Menara Danareksa",
+            title: "403",
             auth: true,
         },
     },
     {
         path: "/:pathMatch(.*)*",
         redirect: "/404",
-        title: "403 - Menara Danareksa",
+        title: "403",
     },
     {
         path: "/404",
         component: NotFound,
         meta: {
-            title: "404 - Menara Danareksa",
+            title: "404",
             auth: true,
         },
     },
@@ -83,6 +89,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+    
     try {
         if (to.matched.some((record) => record.meta.title)) {
             if (to.meta && to.meta.title) {
@@ -91,13 +98,13 @@ router.beforeEach(async (to, from, next) => {
         }
     
         if (to.matched.some((record) => record.meta.auth)) {
-            if (!localStorage.getItem("token")) {
+            if (!localStorage.getItem("access_token")) {
                 const urlParams = new URLSearchParams(window.location.search);
                 const myParam = urlParams.get("code");
                 if (myParam) {
                     return next({ name: "login", query: { code: myParam } });
                 }
-                return next("/login");
+                return next();
             } else {
                 if (mainStore.state.profile.isLoggedIn) {
                     if (to.matched.some((record) => record.meta.specificRole)) {
@@ -154,7 +161,7 @@ router.beforeEach(async (to, from, next) => {
                 }
             }
         } else if (to.matched.some((record) => record.meta.guest)) {
-            if (!localStorage.getItem("token")) {
+            if (!localStorage.getItem("access_token")) {
                 return next();
             } else {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -162,7 +169,7 @@ router.beforeEach(async (to, from, next) => {
                 if (myParam) {
                     return next({ name: "Home", query: { code: myParam } });
                 } else {
-                    return next("/");
+                    return next("/dashboard");
                 }
             }
         } else {

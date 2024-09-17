@@ -59,10 +59,12 @@
                         <!--begin::Actions-->
                         <div class="text-center">
                             <!--begin::Submit button-->
-                            <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
-                                <span class="indicator-label">Continue</span>
-                                <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <button type="button" :disabled="disabledButton || !single.captcha" @click="login"
+                                id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
+                                <span class="indicator-label" v-if="pageStatus != 'form-login'">Continue</span>
+                                <span v-else class="indicator-label">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
                             </button>
                             <!--end::Submit button-->
                         </div>
@@ -100,7 +102,8 @@ import {
     required,
     minLength
 } from '@vuelidate/validators'
-import globalConfig from '../../config/config';
+import globalConfig from '../config/config';
+import { flashMessage } from '../functions/functions';
 
 export default {
     components: { VueRecaptcha },
@@ -165,15 +168,19 @@ export default {
                 password: this.single.password,
                 recaptcha: this.single.captcha
             }
-
-            Api().post('login', formData)
+            this.$loadingShow();
+            Api().post(`${this.$prefix('api')}auth/login`, formData)
                 .then(response => {
+
                     this.$store.commit('profile/SET_PROFILE_DATA', null);
-                    localStorage.setItem('access_token', response.data.data.token.access_token);
+                    localStorage.setItem('access_token', response.data.data.token.accessToken);
 
                     let roleID = response.data.data.user.id_role;
-
-
+                    this.$loadingHide();
+                    this.pageStatus = "standby";
+                    this.$router.push({
+                        name: "home",
+                    });
                 })
                 .catch(error => {
                     grecaptcha.reset()
@@ -181,18 +188,13 @@ export default {
                     this.disabledButton = false;
                     this.pageStatus = "standby";
                     if (error.response && error.response.status == 404) {
-                        this.$swal({
-                            title: "Oopss...",
-                            icon: "error",
-                            text: 'User tidak ditemukan/password salah/tidak aktif',
-                            showCancelButton: false,
-                            confirmButtonColor: "#3085d6",
-                            cancelButtonColor: "#d33",
-                            confirmButtonText: "Ok",
-                        });
+                        flashMessage('error', 'User tidak ditemukan/password salah/tidak aktif', 'Opss!').then(result => {
+                            window.location.reload()
+                        })
                     } else {
                         this.$axiosHandleError(error);
                     }
+                    this.$loadingHide()
                 });
         }
     },
@@ -207,17 +209,16 @@ export default {
 </script>
 
 <style scoped>
-    .icon-password {
-        cursor: pointer;
-        float: right;
-        position: relative;
-        bottom: 32px;
-        right: 10px;
-        font-size: 20px;
-    }
+.icon-password {
+    cursor: pointer;
+    float: right;
+    position: relative;
+    bottom: 32px;
+    right: 10px;
+    font-size: 20px;
+}
 
-    .form-check.form-check-solid .form-check-input:checked {
-        background-color: #EE7B33 !important;
-    }
-
+.form-check.form-check-solid .form-check-input:checked {
+    background-color: #EE7B33 !important;
+}
 </style>

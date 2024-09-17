@@ -56,7 +56,7 @@
     <!--end::Page Vendors Javascript-->
     <!--begin::Page Custom Javascript(used by this page)-->
     <script src="{{asset('assets/js/custom/landing.js')}}"></script>
-    <script src="{{asset('assets/js/custom/pages/company/pricing.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/custom/pages/company/pricing.js')}}"></script> --}}
     <!--end::Page Custom Javascript-->
     <!--end::Javascript-->
     @vite('resources/js/app-landing.js')
