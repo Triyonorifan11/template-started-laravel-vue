@@ -6,13 +6,15 @@ import Api from "@/services/api";
 import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
 import Dashboard from "@/views/admin/dashboard/Dashboard.vue";
-
+import Admin from "@/views/admin/Index.vue";
 
 // import Booking from "@/views/booking/Index.vue";
 
 import NotFound from "@/views/errors/404.vue";
 import ForbiddenAccess from "@/views/errors/403.vue";
 import globalConfig from "@/config/config";
+
+const parentTitle = "PRIVATE PROJECT | ";
 
 const routesWithPrefix = (prefix, routes) => {
     return routes.map((route) => {
@@ -28,10 +30,10 @@ const routes = [
         name: "login",
         component: Login,
         meta: {
-            title: "Login",
+            title: parentTitle + "Login Page",
         },
     },
-    
+
     {
         path: "/home",
         component: Home,
@@ -41,19 +43,25 @@ const routes = [
             auth: true,
         },
     },
-    ...routesWithPrefix("/admin", [
-        {
-            path: "/dashboard",
-            name: "dashboard",
-            component: Dashboard,
-            meta: {
-                title: "Dashboard",
-                specificRole: [globalConfig.role.admin, globalConfig.role.super_admin, globalConfig.role.developer],
-                auth: true,
-            },
+    {
+        path: "/admin",
+        component: Admin,
+        name: "admin",
+        meta: {
+            type: "admin",
         },
-    ]),
-    
+        children: [
+            {
+                path: "dashboard",
+                name: "a-dashboard",
+                component: Dashboard,
+                meta: {
+                    auth: true,
+                    title: parentTitle + "Dashboard",
+                },
+            },
+        ],
+    },
 
     {
         path: "/403",
@@ -89,14 +97,13 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-    
     try {
         if (to.matched.some((record) => record.meta.title)) {
             if (to.meta && to.meta.title) {
                 document.title = to.meta.title;
             }
         }
-    
+
         if (to.matched.some((record) => record.meta.auth)) {
             if (!localStorage.getItem("access_token")) {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -121,7 +128,7 @@ router.beforeEach(async (to, from, next) => {
                             }
                         }
                     }
-    
+
                     return next();
                 }
                 try {
@@ -181,7 +188,6 @@ router.beforeEach(async (to, from, next) => {
         mainStore.commit("profile/SET_PROFILE_DATA", null);
         return next("/login");
     }
-    
 });
 
 export default router;

@@ -171,7 +171,7 @@ How to running server developement.
 1. Running for application using development environment for backend.
 
 ```bash
-php artisan serve
+php artisan start
 ```
 
 2. Running for application using development environment for frontned.

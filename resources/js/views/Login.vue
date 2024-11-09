@@ -179,7 +179,7 @@ export default {
                     this.$loadingHide();
                     this.pageStatus = "standby";
                     this.$router.push({
-                        name: "home",
+                        name: "a-dashboard",
                     });
                 })
                 .catch(error => {
