@@ -218,6 +218,10 @@ export default {
                     this.$axiosHandleError(error);
                 });
         },
+
+        changeStatus(id){
+            this.$toast.success('Update Status Successfuly');
+        },
     },
     computed: {
 

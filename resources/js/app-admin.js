@@ -13,6 +13,8 @@ import SelectMultiple from '@/components/templates/SelectMultiple.vue';
 
 import mainStore from "@/store/index.js";
 
+import Toaster from "@meforma/vue-toaster";
+
 // create app vue
 const app = createApp({
     MainApp
@@ -27,6 +29,12 @@ app.component("app-select-multiple", SelectMultiple);
 app.use(routes);
 
 app.use(globalPlugin);
+
+app.use(Toaster, {
+    position: "top-right",
+    dismissible: true,
+    duration: 3000,
+});
 
 app.use(mainStore);
 
