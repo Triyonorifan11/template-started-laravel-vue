@@ -76,16 +76,15 @@ export default {
 	},
 	data() {
 		return {
-
+			ROLE: 'ADMIN'
 		}
 	},
 	mounted() {
-		setTimeout(function () {
-			let scriptTag = document.createElement('script');
-			scriptTag.src = assetUrl + `assets/js/init-metronic.js`;
-			$('#script-metronic').append(scriptTag);
-			reinitializeAllPlugin();
-		}, 200);
+		// setTimeout(function () {
+		// 	let scriptTag = document.createElement('script');
+		// 	scriptTag.src = assetUrl + `assets/js/init-metronic.js`;
+		// 	$('#script-metronic').append(scriptTag);
+		// }, 200);
 	},
 	methods: {
 

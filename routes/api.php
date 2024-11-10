@@ -29,6 +29,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/change-password', [Api\AuthController::class, 'changePassword'])->middleware(['role:super-admin,customer,admin,developer']);
     });
     Route::group(['prefix' => 'select-list'], function () {
-        // Route::get('/roles', [Api\SelectListController::class, 'roles'])->middleware(['role:admin,super-admin,developer']);
+        Route::get('/roles', [Api\SelectListController::class, 'roles'])->middleware(['role:admin,super-admin,developer']);
     });
 });

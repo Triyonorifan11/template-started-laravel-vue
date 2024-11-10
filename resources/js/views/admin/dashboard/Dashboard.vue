@@ -497,7 +497,8 @@
 
 export default {
     data() {
-        return {           
+        return {         
+			ROLE: 'ADMIN'  
         }
     },
     validations() {

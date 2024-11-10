@@ -67,6 +67,7 @@
     <script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
     <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script>
     <script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
+    <script src="{{ asset('assets/js/custom/documentation/documentation.js') }}"></script>
 
     @vite('resources/js/app-admin.js')
 </body>

@@ -7,6 +7,9 @@ import Login from "@/views/Login.vue";
 import Home from "@/views/Home.vue";
 import Dashboard from "@/views/admin/dashboard/Dashboard.vue";
 import Admin from "@/views/admin/Index.vue";
+import Datatable from "@/views/admin/Templates/Datatables/Index.vue";
+import Forms from "@/views/admin/Templates/Forms/Index.vue";
+import Modals from "@/views/admin/Templates/Modals/Index.vue";
 
 // import Booking from "@/views/booking/Index.vue";
 
@@ -58,6 +61,33 @@ const routes = [
                 meta: {
                     auth: true,
                     title: parentTitle + "Dashboard",
+                },
+            },
+            {
+                path: "datatable",
+                name: "a-datatable",
+                component: Datatable,
+                meta: {
+                    auth: true,
+                    title: parentTitle + "Datatable Server Side",
+                },
+            },
+            {
+                path: "forms",
+                name: "a-forms",
+                component: Forms,
+                meta: {
+                    auth: true,
+                    title: parentTitle + "Datatable Server Side",
+                },
+            },
+            {
+                path: "modals",
+                name: "a-modals",
+                component: Modals,
+                meta: {
+                    auth: true,
+                    title: parentTitle + "Datatable Server Side",
                 },
             },
         ],

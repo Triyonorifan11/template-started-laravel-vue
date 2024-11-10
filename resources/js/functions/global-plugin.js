@@ -42,7 +42,7 @@ export default {
 
                 if (code == 400) {
                     Swal.fire({
-                        title: "Oopss...",
+                        title: "Something went wrong!",
                         icon: "error",
                         text: res ? res.message : 'Terjadi kesalahan server',
                         showCancelButton: false,
@@ -62,7 +62,7 @@ export default {
                     window.location.replace(baseUrl + '/login');
                 } else if (code == 422) {
                     Swal.fire({
-                        title: "Oopss...",
+                        title: "Something went wrong!",
                         icon: "error",
                         text: res ? res.message : 'Terjadi kesalahan server',
                         showCancelButton: false,
@@ -76,7 +76,7 @@ export default {
                     });
                 } else if (code == 404) {
                     Swal.fire({
-                        title: "Oopss...",
+                        title: "Something went wrong!",
                         icon: "error",
                         text: "Request/Resource not found!",
                         showCancelButton: false,
@@ -90,7 +90,7 @@ export default {
                     });
                 } else {
                     Swal.fire({
-                        title: "Oopss...",
+                        title: "Something went wrong!",
                         icon: "error",
                         text: "Terjadi kesalahan koneksi",
                         showCancelButton: false,
@@ -177,11 +177,7 @@ export default {
              * @param type is api or api-web
              */
             (app.config.globalProperties.$prefix = (type) => {
-                if (type == "api") {
-                    return "api/";
-                } else {
-                    return "api-web/";
-                }
+                return type + '/';
             })
     }
 };

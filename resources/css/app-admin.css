@@ -1,11 +1,54 @@
 /* css for admin */
 
-:root{
-    --main-color : #00d0ff;
+:root {
+    --main-color: #00d0ff;
     --white-color: #fff;
+    --bs-blue: #009ef6;
+    --bs-indigo: #6610f2;
+    --bs-purple: #6f42c1;
+    --bs-pink: #d63384;
+    --bs-red: #dc3545;
+    --bs-orange: #fd7e14;
+    --bs-yellow: #ffc107;
+    --bs-green: #198754;
+    --bs-teal: #20c997;
+    --bs-cyan: #0dcaf0;
+    --bs-gray: #7e8299;
+    --bs-gray-dark: #3f4254;
+    --bs-gray-100: #f5f8fa;
+    --bs-gray-200: #eff2f5;
+    --bs-gray-300: #e4e6ef;
+    --bs-gray-400: #b5b5c3;
+    --bs-gray-500: #a1a5b7;
+    --bs-gray-600: #7e8299;
+    --bs-gray-700: #5e6278;
+    --bs-gray-800: #3f4254;
+    --bs-gray-900: #181c32;
+    --bs-white: #ffffff;
+    --bs-light: #f5f8fa;
+    --bs-primary: #009ef7;
+    --bs-secondary: #e4e6ef;
+    --bs-success: #50cd89;
+    --bs-info: #7239ea;
+    --bs-warning: #ffc700;
+    --bs-danger: #f1416c;
+    --bs-dark: #181c32;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-light-rgb: 245, 248, 250;
+    --bs-primary-rgb: 0, 158, 247;
+    --bs-secondary-rgb: 228, 230, 239;
+    --bs-success-rgb: 80, 205, 137;
+    --bs-info-rgb: 114, 57, 234;
+    --bs-warning-rgb: 255, 199, 0;
+    --bs-danger-rgb: 241, 65, 108;
+    --bs-dark-rgb: 24, 28, 50;
+    --bs-white-rgb: 255, 255, 255;
+    --bs-black-rgb: 0, 0, 0;
+    --bs-body-color-rgb: 24, 28, 50;
+    --bs-body-bg-rgb: 255, 255, 255;
 }
 
-.box-loader{
+.box-loader {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -16,71 +59,71 @@
 }
 /* loader */
 .loader {
-  animation: rotate 1s infinite;
-  height: 50px;
-  width: 50px;
-  display: inline-block;
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
 }
 
 .loader:before,
 .loader:after {
-  border-radius: 50%;
-  content: "";
-  display: block;
-  height: 20px;
-  width: 20px;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
 }
 .loader:before {
-  animation: ball1 1s infinite;
-  background-color: var(--white-color);
-  box-shadow: 30px 0 0 var(--main-color);
-  margin-bottom: 10px;
+    animation: ball1 1s infinite;
+    background-color: var(--white-color);
+    box-shadow: 30px 0 0 var(--main-color);
+    margin-bottom: 10px;
 }
 .loader:after {
-  animation: ball2 1s infinite;
-  background-color: var(--main-color);
-  box-shadow: 30px 0 0 var(--white-color);;
+    animation: ball2 1s infinite;
+    background-color: var(--main-color);
+    box-shadow: 30px 0 0 var(--white-color);
 }
 
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg) scale(0.8);
-  }
-  50% {
-    transform: rotate(360deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(720deg) scale(0.8);
-  }
+    0% {
+        transform: rotate(0deg) scale(0.8);
+    }
+    50% {
+        transform: rotate(360deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(720deg) scale(0.8);
+    }
 }
 
 @keyframes ball1 {
-  0% {
-    box-shadow: 30px 0 0 var(--main-color);
-  }
-  50% {
-    box-shadow: 0 0 0 var(--main-color);
-    margin-bottom: 0;
-    transform: translate(15px, 15px);
-  }
-  100% {
-    box-shadow: 30px 0 0 var(--main-color);
-    margin-bottom: 10px;
-  }
+    0% {
+        box-shadow: 30px 0 0 var(--main-color);
+    }
+    50% {
+        box-shadow: 0 0 0 var(--main-color);
+        margin-bottom: 0;
+        transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 var(--main-color);
+        margin-bottom: 10px;
+    }
 }
 
 @keyframes ball2 {
-  0% {
-    box-shadow: 30px 0 0 var(--white-color);;
-  }
-  50% {
-    box-shadow: 0 0 0 var(--white-color);;
-    margin-top: -20px;
-    transform: translate(15px, 15px);
-  }
-  100% {
-    box-shadow: 30px 0 0 var(--white-color);;
-    margin-top: 0;
-  }
+    0% {
+        box-shadow: 30px 0 0 var(--white-color);
+    }
+    50% {
+        box-shadow: 0 0 0 var(--white-color);
+        margin-top: -20px;
+        transform: translate(15px, 15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 var(--white-color);
+        margin-top: 0;
+    }
 }
 /* end loader */
